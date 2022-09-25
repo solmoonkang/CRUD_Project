@@ -28,14 +28,18 @@ public class Member {
     private String phonenumber;
 
     @Builder
-    public Member(String identity, String password, String name, String email, String address, String birthdate, String sex, String phonenumber) {
+    public Member(String identity, String password, String name) {
         this.identity = identity;
         this.password = password;
         this.name = name;
+    }
+
+    @Builder
+    public void updateMember(String email, String address, String birthdate, String sex, String phonenumber) {
         this.email = email;
         this.address = address;
         this.birthdate = birthdate;
         this.sex = sex;
-        this. phonenumber = phonenumber;
+        this.phonenumber = phonenumber;
     }
 }

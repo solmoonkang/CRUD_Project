@@ -22,18 +22,10 @@ public class MemberService {
 
     // 회원 가입
     public void signUp(SignUpDto signUpDto) {
-
-
-
         Member member = Member.builder()
                 .identity(signUpDto.getIdentity())
                 .password(signUpDto.getPassword())
                 .name(signUpDto.getName())
-                .email(signUpDto.getEmail())
-                .address(signUpDto.getAddress())
-                .birthdate(signUpDto.getBirthdate())
-                .sex(signUpDto.getSex())
-                .phonenumber(signUpDto.getPhonenumber())
                 .build();
 
         memberRepository.save(member);
@@ -42,13 +34,23 @@ public class MemberService {
     // 회원 정보 수정
     public void update(UpdateDto updateDto) {
         Member member = memberRepository.findByIdentity(updateDto.getIdentity());
+
+//        if(updateDto.getIdentity().equals(null)) {
+//            System.out.println("아이디가 입력되지 않았습니다!");
+//        } else if (updateDto.getPassword().equals(null)) {
+//            System.out.println("비밀번호가 입력되지 않았습니다!");
+//        }
+
+        // member.updateName(updateDto.getName()); // -> 홍길동에서 홍준표로 바뀌는 부분
+        // email, address, birthdate, sex, phonenumber를 수정
+        member.updateMember(updateDto.getEmail(), updateDto.getAddress(), updateDto.getBirthdate(), updateDto.getSex(), updateDto.getPhonenumber());
         memberRepository.save(member);
     }
 
-    // 전체 회원 정보 조회
-    // public List<ReadDto> getAllMember() {
-    //
-    // }
+//     전체 회원 정보 조회
+//     public List<ReadDto> getAllMember() {
+//
+//     }
 
     // 회원 정보 조회
     public ReadDto getMember(String identity) {
