@@ -12,8 +12,9 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
+    // TODO
     Member findByIdentity(String identity);
     Member findByName(String name);
     Member save(Member member);
-    List<Member> findAll();
+
 }

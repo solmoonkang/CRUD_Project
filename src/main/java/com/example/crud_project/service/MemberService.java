@@ -20,8 +20,8 @@ public class MemberService {
     @Autowired
     MemberRepository memberRepository;
 
+    // TODO
     // 회원 가입
-    // TODO: builder() 함수 오류 확인 후 재설정 필요
     public void signUp(SignUpDto signUpDto) {
         Member member = Member.builder()
                 .identity(signUpDto.getIdentity())
@@ -42,7 +42,7 @@ public class MemberService {
 //            System.out.println("비밀번호가 입력되지 않았습니다!");
 //        }
 
-        // member.updateName(updateDto.getName()); // -> 홍길동에서 홍준표로 바뀌는 부분
+//        member.updateName(updateDto.getName()); // -> 홍길동에서 홍준표로 바뀌는 부분
         // email, address, birthdate, sex, phonenumber를 수정
         member.updateMember(updateDto.getEmail(), updateDto.getAddress(), updateDto.getBirthdate(), updateDto.getSex(), updateDto.getCellphone());
         memberRepository.save(member);
