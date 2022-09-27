@@ -9,5 +9,5 @@ public class UpdateDto {
     private String address;
     private String birthdate;
     private String sex;
-    private String phonenumber;
+    private String cellphone;
 }

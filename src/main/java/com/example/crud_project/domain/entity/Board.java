@@ -9,15 +9,15 @@ import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 
 @Getter
-@Entity
-@Table
+@Entity @Table
 @AllArgsConstructor
 @NoArgsConstructor
 public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String bno;
+    private Long bno;
+
     private String title;
     private String content;
 

@@ -25,7 +25,7 @@ public class Member {
     private String address;
     private String birthdate;
     private String sex;
-    private String phonenumber;
+    private String cellphone;
 
     @Builder
     public Member(String identity, String password, String name) {
@@ -35,11 +35,11 @@ public class Member {
     }
 
     @Builder
-    public void updateMember(String email, String address, String birthdate, String sex, String phonenumber) {
+    public void updateMember(String email, String address, String birthdate, String sex, String cellphone) {
         this.email = email;
         this.address = address;
         this.birthdate = birthdate;
         this.sex = sex;
-        this.phonenumber = phonenumber;
+        this.cellphone = cellphone;
     }
 }
