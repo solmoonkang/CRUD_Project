@@ -12,9 +12,12 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    // TODO
+    // TODO OPTIONAL 사용
     Member findByIdentity(String identity);
-    Member findByName(String name);
     Member save(Member member);
+    // 중복 여부 확인
+    boolean existsByIdentity(String identity);
+    boolean existsByEmail(String email);
+    boolean existsByCellphone(String cellphone);
 
 }
