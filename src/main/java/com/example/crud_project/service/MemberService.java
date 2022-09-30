@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /*
 스프링에서의 빈이란
@@ -34,6 +35,11 @@ public class MemberService {
                 .identity(signUpDto.getIdentity())
                 .password(signUpDto.getPassword())
                 .name(signUpDto.getName())
+                .email(signUpDto.getEmail())
+                .address(signUpDto.getAddress())
+                .birthdate(signUpDto.getBirthdate())
+                .sex(signUpDto.getSex())
+                .cellphone(signUpDto.getCellphone())
                 .build();
 
         memberRepository.save(member);
@@ -57,18 +63,20 @@ public class MemberService {
 
     // 회원 정보 수정
     public void update(UpdateDto updateDto) {
-        Member member = memberRepository.findByIdentity(updateDto.getIdentity());
+        Optional<Member> member = memberRepository.findByIdentity(updateDto.getIdentity());
 
-//        if(updateDto.getIdentity().equals(null)) {
-//            System.out.println("아이디가 입력되지 않았습니다!");
-//        } else if (updateDto.getPassword().equals(null)) {
-//            System.out.println("비밀번호가 입력되지 않았습니다!");
-//        }
+        if(updateDto.getIdentity().equals(null)) {
+            System.out.println("아이디가 입력되지 않았습니다!");
+        } else if (updateDto.getPassword().equals(null)) {
+            System.out.println("비밀번호가 입력되지 않았습니다!");
+        }
 
 //        member.updateName(updateDto.getName()); // -> 홍길동에서 홍준표로 바뀌는 부분
         // email, address, birthdate, sex, phonenumber를 수정
-        member.updateMember(updateDto.getEmail(), updateDto.getAddress(), updateDto.getBirthdate(), updateDto.getSex(), updateDto.getCellphone());
-        memberRepository.save(member);
+        member.get()
+                .updateMember(updateDto.getEmail(), updateDto.getAddress(), updateDto.getBirthdate(), updateDto.getSex(), updateDto.getCellphone());
+
+        memberRepository.save(member.get());
     }
 
     // 전체 회원 정보 조회
@@ -78,17 +86,17 @@ public class MemberService {
 
     // 회원 정보 조회
     public ReadDto getMember(String identity) {
-        Member member = memberRepository.findByIdentity(identity);
+        Optional<Member> member = memberRepository.findByIdentity(identity);
 
         ReadDto readDto = ReadDto.builder()
-                .identity(member.getIdentity())
+                .identity(member.get().getIdentity())
                 .build();
         return readDto;
     }
 
     // 회원 정보 삭제
     public void delete(DeleteDto deleteDto) {
-        Member member = memberRepository.findByIdentity(deleteDto.getIdentity());
-        memberRepository.delete(member);
+        Optional<Member> member = memberRepository.findByIdentity(deleteDto.getIdentity());
+        memberRepository.delete(member.get());
     }
 }

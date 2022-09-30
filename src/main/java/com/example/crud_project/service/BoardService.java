@@ -1,11 +1,13 @@
 package com.example.crud_project.service;
 
+import com.example.crud_project.domain.boardDto.BoardDto;
 import com.example.crud_project.domain.entity.Board;
 import com.example.crud_project.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,9 +17,10 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     // TODO 게시글 등록
-    public void register(Board board) {
+    public Long register(BoardDto boardDto) {
         // 게시글 작성
-        boardRepository.save(board);
+
+        return boardRepository.save(boardDto.toEntity()).getBno();
     }
 
     // TODO 게시글 수정
@@ -26,8 +29,21 @@ public class BoardService {
     }
 
     // TODO 게시글 목록
-    public List<Board> list() {
-        return boardRepository.findAll();
+    public List<BoardDto> list() {
+        List<Board> boardList = boardRepository.findAll();
+        List<BoardDto> boardDtoList = new ArrayList<>();
+
+        for (Board board : boardList) {
+            BoardDto boardDto = BoardDto.builder()
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .writer(board.getWriter())
+                    .createdDate(board.getCreatedDate())
+                    .updatedDate(board.getUpdatedDate())
+                    .build();
+            boardDtoList.add(boardDto);
+        }
+        return boardDtoList;
     }
 
     // TODO 게시글 상세조회

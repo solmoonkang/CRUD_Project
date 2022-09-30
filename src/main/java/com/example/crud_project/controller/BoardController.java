@@ -1,5 +1,6 @@
 package com.example.crud_project.controller;
 
+import com.example.crud_project.domain.boardDto.BoardDto;
 import com.example.crud_project.domain.entity.Board;
 import com.example.crud_project.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,8 @@ public class BoardController {
 
     // 게시글 등록
     @PostMapping("/register")
-    public void register(Board board) {
-        boardService.register(board);
+    public void register(BoardDto boardDto) {
+        boardService.register(boardDto);
     }
 
     // 게시글 수정
@@ -31,7 +32,7 @@ public class BoardController {
     // 게시글 목록
     // TODO return형식 뭐로 받아와야하는지 - service를 그대로 받아와야하는지
     @GetMapping("")
-    public List<Board> list(Model model) {
+    public List<BoardDto> list(Model model) {
         model.addAttribute("list", boardService.list());
         return boardService.list();
     }

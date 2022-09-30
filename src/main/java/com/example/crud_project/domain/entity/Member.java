@@ -36,10 +36,15 @@ public class Member {
     private String cellphone;
 
     @Builder    // 생성자 대신에 이용하는 패턴
-    public Member(String identity, String password, String name) {
+    public Member(String identity, String password, String name, String email, String address, String birthdate, String sex, String cellphone) {
         this.identity = identity;
         this.password = password;
         this.name = name;
+        this.email = email;
+        this.address = address;
+        this.birthdate = birthdate;
+        this.sex = sex;
+        this.cellphone = cellphone;
     }
 
     public void updateMember(String email, String address, String birthdate, String sex, String cellphone) {
