@@ -7,9 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -17,43 +14,32 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     // TODO 게시글 등록
-    public Long register(BoardDto boardDto) {
-        // 게시글 작성
-
-        return boardRepository.save(boardDto.toEntity()).getBno();
+    public void register(BoardDto boardDto) {
+        boardRepository.save(boardDto.toEntity());
     }
 
     // TODO 게시글 수정
+    // TODO 영속성 컨텍스트 - Entity를 영구히 저장하는 환경 -> 추가적으로 공부
     public void update(Board board) {
-        boardRepository.save(board);
+
+
+        boardRepository.save();
     }
 
     // TODO 게시글 목록
-    public List<BoardDto> list() {
-        List<Board> boardList = boardRepository.findAll();
-        List<BoardDto> boardDtoList = new ArrayList<>();
+    // 이 부분 이해가 잘 안됌 -> 검색해서 공부
+    public void list() {
 
-        for (Board board : boardList) {
-            BoardDto boardDto = BoardDto.builder()
-                    .title(board.getTitle())
-                    .content(board.getContent())
-                    .writer(board.getWriter())
-                    .createdDate(board.getCreatedDate())
-                    .updatedDate(board.getUpdatedDate())
-                    .build();
-            boardDtoList.add(boardDto);
-        }
-        return boardDtoList;
     }
 
     // TODO 게시글 상세조회
-    public Board detail(Long id) {
-        return boardRepository.findById(id).get();
+    public void detail() {
+
     }
 
     // TODO 게시글 삭제
-    public void delete(Long id) {
-        boardRepository.deleteById(id);
+    public void delete() {
+
     }
 
 }

@@ -71,10 +71,9 @@ public class MemberService {
             System.out.println("비밀번호가 입력되지 않았습니다!");
         }
 
-//        member.updateName(updateDto.getName()); // -> 홍길동에서 홍준표로 바뀌는 부분
+        // member.updateName(updateDto.getName()); // -> 홍길동에서 홍준표로 바뀌는 부분
         // email, address, birthdate, sex, phonenumber를 수정
-        member.get()
-                .updateMember(updateDto.getEmail(), updateDto.getAddress(), updateDto.getBirthdate(), updateDto.getSex(), updateDto.getCellphone());
+        member.get().updateMember(updateDto.getEmail(), updateDto.getAddress(), updateDto.getBirthdate(), updateDto.getSex(), updateDto.getCellphone());
 
         memberRepository.save(member.get());
     }

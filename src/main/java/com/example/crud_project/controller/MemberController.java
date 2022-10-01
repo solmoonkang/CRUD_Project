@@ -28,8 +28,8 @@ public class MemberController {
         memberService.signUp(signUpDto);
     }
 
+    // TODO CheckDuplicate URL Site
     // 회원 가입 시 중복 확인
-    // TODO 중복 여부 확인 시 URL위치 설정필요
     // 아이디 중복 확인
     @GetMapping("")
     public ResponseEntity<Boolean> checkIdentityDuplicate(@PathVariable String identity) {

@@ -5,30 +5,36 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter
+@Getter
 @ToString
 @NoArgsConstructor
 public class BoardDto {
     private String title;
     private String content;
     private String writer;
-
+    int hits;
+    private String deletedYn;
     private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
+    private LocalDateTime modifiedDate;
 
-    // TODO toEntity() 부분 수정필요
     public Board toEntity() {
-        Board board = Board.builder()
-
-        return board;
+        return Board.builder()
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .hits(0)
+                .deleteYn(deletedYn)
+                .build();
     }
 
     @Builder
-    public BoardDto(String title, String content, String writer, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    public BoardDto(String title, String content, String writer, int hits, String deletedYn, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.title = title;
         this.content = content;
         this.writer = writer;
+        this.hits = hits;
+        this.deletedYn = deletedYn;
         this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
+        this.modifiedDate = updatedDate;
     }
 }
