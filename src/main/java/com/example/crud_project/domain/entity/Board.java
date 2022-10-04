@@ -18,6 +18,8 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;
+    // TODO 게시판에 등록된 게시물의 번호를 저장 -> 번호로 게시물을 등록/수정/삭제할 수 있는 형태로
+    private Long id;
 
     // TODO Secret Answer Function
     @Column(length = 10, nullable = false)
@@ -26,10 +28,11 @@ public class Board {
     private String content; // 내용
     @Column(columnDefinition = "TEXT", nullable = false)
     private String writer;  // 작성자
+    private String registerId;  // 작성 번호
     private int hits;       // 방문수
-    private String noticeYn;  // 공지 여부
-    private String secretYn;  // 비밀 여부
-    private String deleteYn;  // 삭제 여부
+    //    private String noticeYn;  // 공지 여부
+    //    private String secretYn;  // 비밀 여부
+    // private String deleteYn;  // 삭제 여부
 
     @CreationTimestamp  // INSERT쿼리가 발생할 경우, 현재 시간을 값으로 채워 쿼리를 생성
     private LocalDateTime createdDate;  // 작성일
@@ -41,12 +44,12 @@ public class Board {
     private Member member;
 
     @Builder
-    public Board(String title, String content, String writer, int hits, String deleteYn) {
+    public Board(String title, String content, String writer, String registerId, int hits) {
         this.title = title;
         this.content = content;
         this.writer = writer;
+        this.registerId = registerId;
         this.hits = hits;
-        this.deleteYn = deleteYn;
     }
 
     public void update(String title, String content, String writer) {
